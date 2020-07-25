@@ -1,11 +1,9 @@
 package com.store.manager.storemanager.stock;
 
+import com.store.manager.storemanager.product.Product;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -18,21 +16,24 @@ public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    private long productId;
-    private long quantity;
-    private boolean hasStock;
+
+    @OneToOne
+    private Product product;
+
+    private Long quantity;
+    private Boolean hasStock;
 
     @Override
     public String toString() {
         return String.format(
                 "Stock[" +
                         "id=%d, " +
-                        "productId=%d, " +
+                        "product=%s, " +
                         "quantity=%d, " +
                         "hasStock=%s" +
                         "]",
                 this.id,
-                this.getProductId(),
+                this.getProduct().getName(),
                 this.getQuantity(),
                 this.hasStock);
     }

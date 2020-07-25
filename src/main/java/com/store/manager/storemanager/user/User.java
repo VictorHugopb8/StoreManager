@@ -23,6 +23,7 @@ public class User {
     private UserType type;
     private String username;
     private String password;
+    private String email;
 
     @Override
     public String toString() {
@@ -31,16 +32,18 @@ public class User {
                         "id=%d, " +
                         "name=%s, " +
                         "nationalId=%s, " +
-                        "type=%s" +
+                        "type=%s, " +
                         "username=%s, " +
-                        "password=%s" +
+                        "password=%s, " +
+                        "email=%s" +
                         "]",
                 this.id,
                 this.getName(),
                 this.getNationalId(),
                 this.getType(),
                 this.getUsername(),
-                this.getPassword());
+                this.getPassword(),
+                this.getEmail());
     }
 
 }

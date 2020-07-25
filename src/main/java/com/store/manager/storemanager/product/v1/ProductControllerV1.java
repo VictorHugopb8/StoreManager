@@ -4,10 +4,7 @@ import com.store.manager.storemanager.exceptions.BadRequestException;
 import com.store.manager.storemanager.exceptions.ProductNotFoundException;
 import com.store.manager.storemanager.product.Product;
 import com.store.manager.storemanager.product.ProductDTO;
-import com.store.manager.storemanager.product.services.DeleteProductService;
-import com.store.manager.storemanager.product.services.ListProductService;
-import com.store.manager.storemanager.product.services.SaveProductService;
-import com.store.manager.storemanager.product.services.UpdateProductService;
+import com.store.manager.storemanager.product.services.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +22,7 @@ public class ProductControllerV1 {
     private final SaveProductService saveProductService;
     private final UpdateProductService updateProductService;
     private final DeleteProductService deleteProductService;
+    private final GetProductService getProductService;
 
     @GetMapping
     public Page<ProductDTO> page(UriComponentsBuilder uriBuilder, HttpServletResponse response,
@@ -57,5 +55,10 @@ public class ProductControllerV1 {
     @DeleteMapping("/{id}/delete")
     public void delete(@PathVariable("id") Long id) throws ProductNotFoundException {
         deleteProductService.delete(id);
+    }
+
+    @GetMapping("/{productId}/single")
+    public ProductDTO get(@PathVariable("productId") Long productId) throws ProductNotFoundException {
+        return getProductService.get(productId);
     }
 }
