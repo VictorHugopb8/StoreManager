@@ -27,7 +27,7 @@ public class UpdateStockServiceImpl implements UpdateStockService {
         if (id != null) {
             Optional<Stock> stockOpt = stockRepository.findById(id);
             Optional<Product> product = productRepository.findById(stockDTO.getProductId());
-            Stock stock = stockOpt.orElseThrow(() -> new StockNotFoundException(null));
+            Stock stock = stockOpt.orElseThrow(StockNotFoundException::new);
             stock.setQuantity(stockDTO.getQuantity());
             stock.setProduct(product.orElseThrow(ProductNotFoundException::new));
             stock.setHasStock(stockDTO.getQuantity() != null && stockDTO.getQuantity() > 0);

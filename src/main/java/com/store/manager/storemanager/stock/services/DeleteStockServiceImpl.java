@@ -21,6 +21,6 @@ public class DeleteStockServiceImpl implements DeleteStockService {
     @Override
     public void delete(Long id) throws StockNotFoundException {
         Optional<Stock> stockOpt = stockRepository.findById(id);
-        stockRepository.delete(stockOpt.orElseThrow(() -> new StockNotFoundException(null)));
+        stockRepository.delete(stockOpt.orElseThrow(StockNotFoundException::new));
     }
 }

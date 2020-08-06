@@ -18,7 +18,7 @@ public class GetStockServiceImpl implements GetStockService {
     @Override
     public StockDTO get(Long id) throws StockNotFoundException {
         Optional<Stock> stockOpt = stockRepository.findById(id);
-        Stock stock = stockOpt.orElseThrow(() -> new StockNotFoundException(null));
+        Stock stock = stockOpt.orElseThrow(StockNotFoundException::new);
         return StockDTO.builder()
                 .id(stock.getId())
                 .hasStock(stock.getQuantity() != null && stock.getQuantity() > 0)
